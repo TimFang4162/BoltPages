@@ -1,0 +1,30 @@
+[project]
+name = "blog"
+version = "2.0.0"
+description = "Modern static blog generator with markdown, typst support and dev server"
+requires-python = ">=3.11"
+dependencies = [
+    "python-frontmatter",
+    "minify-html",
+    "mistune>=3",
+    "jinja2",
+    "pygments",
+    "Pillow",
+    "rich",
+    "tomli; python_version<'3.11'",
+    "watchdog>=6.0",
+    "livereload>=2.7",
+]
+
+[project.scripts]
+blog = "blog.__main__:main"
+
+[project.optional-dependencies]
+dev = ["mypy", "types-Pillow"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_ignores = true
+disallow_untyped_defs = true

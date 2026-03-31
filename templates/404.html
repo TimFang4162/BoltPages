@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}404 - 页面未找到{% endblock %}
+
+{% block body %}
+<main class="article-list-container">
+  <div style="text-align: center; padding: 6rem 1rem;">
+    <h1 style="font-size: 1.5rem; font-weight: 700; color: var(--color-text-strong); margin: 0 0 1rem 0;">页面未找到</h1>
+    <p style="color: var(--color-text-secondary); margin: 0 0 2rem 0;">抱歉，您访问的页面不存在或已被删除。</p>
+    <a href="/index.html" style="padding: 0.75rem 1.5rem; background-color: var(--color-background-accent); color: var(--color-text-accent); border-radius: var(--radius); font-weight: 700;">
+      <span class="icon--mdi icon--mdi--home-outline icon_16px"></span>
+      返回首页
+    </a>
+  </div>
+</main>
+{% endblock %}

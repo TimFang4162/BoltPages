@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <title>{% block title %}{% endblock %}</title>
+    <script>
+      (function() {
+        try {
+          var savedTheme = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = savedTheme || (prefersDark ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+          // document.documentElement.classList.add('no-transitions');
+          console.log('Theme set to:', theme);
+        } catch (e) {
+          console.error('Theme initialization error:', e);
+        }
+      })();
+    </script>
+    <link rel="stylesheet" href="{{ ASSETS.get('style.css', '/style.css') }}">
+    <script src="{{ ASSETS.get('script.js', '/script.js') }}"></script>
+    {% block head %}{% endblock %}
+  </head>
+
+  <body>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="主导航">
+        <div class="nav-content">
+          <div class="site-brand">
+            <a href="/index.html" rel="home" class="site-name">{{ SITE_NAME }}</a>
+          </div>
+          <ul class="nav-links">
+            <li><a href="/index.html" class="nav-link"><span class="icon--mdi icon--mdi--home-outline icon_16px"></span> 首页</a></li>
+            <li><a href="/archive.html" class="nav-link"><span class="icon--mdi icon--mdi--archive-outline icon_16px"></span> 归档</a></li>
+            <li><a href="/tags.html" class="nav-link"><span class="icon--mdi icon--mdi--hashtag-box-outline icon_16px"></span> 标签</a></li>
+            <li>
+              <button class="nav-link theme-toggle" aria-label="切换主题">
+                <span class="icon--mdi icon--mdi--moon-and-stars icon_16px"></span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    {% block body %}{% endblock %}
+    <footer class="site-footer" role="contentinfo">
+      <p>&copy; {{ SITE_NAME }} | Yet Another Pythonic Blog</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}首页{% endblock %}
+
+{% block head %}
+<script src="/three.min.js" defer></script>
+<script src="{{ ASSETS.get('hero-particles.js', '/hero-particles.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+<section class="hero-section">
+  <div class="hero-content">
+    <div class="hero-avatar">
+      <img src="/avatar.jpg" alt="Timmy's avatar" />
+    </div>
+    <h1 class="hero-title">BoltPages</h1>
+    <p class="hero-bio">Yet Another Pythonic Blog.</p>
+    <a href="/about.html" class="hero-button">了解更多<span class="icon--mdi icon--mdi--arrow-right icon_16px"></span></a>
+  </div>
+</section>
+
+<main class="article-list-container">
+  {% set view_mode = 'card' %}
+  {% set header_title = '近期文章' %}
+  {% include "_article_list_items.html" %}
+</main>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}归档{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+<main class="page-container">
+  <h1>归档</h1>
+  
+  <section class="archive-stats">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">总文章数</div>
+        <div class="stat-value">{{ total_posts }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">总字数</div>
+        <div class="stat-value">{{ total_words|format_words }}</div>
+      </div>
+      <div class="stat-card chart-card">
+        <div class="stat-label">字数趋势</div>
+        <div class="chart-wrapper">
+          <div class="chart-main">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="{{ chart_data.svg_path }}" fill="none" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke"/>
+            </svg>
+          </div>
+          <div class="chart-y-axis">
+            {% for tick in chart_data.y_ticks %}
+            <span class="chart-y-tick" style="bottom: {{ tick.percent }}%">
+              {{ tick.value }}k
+            </span>
+            {% endfor %}
+          </div>
+          <div class="chart-x-axis">
+            {% for idx, point in chart_data.x_labels %}
+            <span class="chart-x-label" style="left: {{ point.x_percent }}%">
+              {{ point.label }}
+            </span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="stat-card heatmap-card">
+        <div class="stat-label">热力图</div>
+        {{ heatmap_html|safe }}
+      </div>
+    </div>
+  </section>
+  
+  {% for year_month in grouped %}
+  <section class="archive-section">
+    {% set view_mode = 'list' %}
+    {% set header_title = year_month %}
+    {% set posts = grouped[year_month] %}
+    {% set view_toggleable = False %}
+    {% include "_article_list_items.html" %}
+  </section>
+  {% endfor %}
+</main>
+{% endblock %}

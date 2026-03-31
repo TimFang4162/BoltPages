@@ -1,0 +1,65 @@
+<div class="article-list-header">
+  <h1>{{ header_title | default('文章列表') }}</h1>
+  {% if view_toggleable!=False %}
+  <div class="view-toggle" role="group" aria-label="视图切换">
+    <button
+      class="view-btn list-btn {% if view_mode == 'list' %}active{% endif %}"
+      onclick="switchView('list')"
+      aria-pressed="{% if view_mode == 'list' %}true{% else %}false{% endif %}"
+    >
+    <span class="icon--mdi icon--mdi--view-agenda-outline icon_14px"></span>列表
+    </button>
+    <button
+      class="view-btn card-btn {% if view_mode == 'card' %}active{% endif %}"
+      onclick="switchView('card')"
+      aria-pressed="{% if view_mode == 'card' %}true{% else %}false{% endif %}"
+    >
+    <span class="icon--mdi icon--mdi--view-grid-outline icon_14px"></span>卡片
+    </button>
+  </div>
+  {% endif %}
+</div>
+<div class="article-list {{ view_mode }}-view" id="articleList">
+  {% for post in posts %}
+  <article class="article-item">
+    <a href="/{{ post['path'].with_suffix('.html') }}">
+      <h2 class="article-title">{{ post.metadata.title or "无标题" }}</h2>
+    </a>
+    <footer class="article-meta">
+      <time class="article-date" datetime="{{ post.metadata.date }}">
+        <span class="icon--mdi icon--mdi--date-range icon_14px"></span>{{ post.metadata.date }}
+      </time>
+      {% if post.metadata.tags %}
+      <div class="article-tags">
+        {% for tag in post.metadata.tags %}
+        <span class="article-tag">#<a href="/tags/{{ tag }}.html" rel="tag">{{ tag }}</a></span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </footer>
+  </article>
+  {% endfor %}
+</div>
+<script>
+  function switchView(viewMode) {
+    const articleList = document.getElementById("articleList");
+    const listBtn = document.querySelector(".list-btn");
+    const cardBtn = document.querySelector(".card-btn");
+
+    articleList.classList.remove("list-view", "card-view");
+    articleList.classList.add(viewMode + "-view");
+
+    listBtn.classList.remove("active");
+    cardBtn.classList.remove("active");
+
+    if (viewMode === "list") {
+      listBtn.classList.add("active");
+      listBtn.setAttribute("aria-pressed", "true");
+      cardBtn.setAttribute("aria-pressed", "false");
+    } else {
+      cardBtn.classList.add("active");
+      cardBtn.setAttribute("aria-pressed", "true");
+      listBtn.setAttribute("aria-pressed", "false");
+    }
+  }
+</script>

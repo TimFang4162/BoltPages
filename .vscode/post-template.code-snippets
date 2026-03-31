@@ -1,0 +1,16 @@
+{
+	"Blog Post Frontmatter": {
+		"scope": "markdown",
+		"prefix": "frontmatter",
+		"description": "Insert blog post frontmatter template",
+		"body": [
+			"---",
+			"title: $1",
+			"date: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+			"tags: [$2]",
+			"---",
+			"",
+			"$0"
+		]
+	}
+}

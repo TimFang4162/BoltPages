@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: blog
+Version: 2.0.0
+Summary: Modern static blog generator with markdown, typst support and dev server
+Requires-Python: >=3.11
+Requires-Dist: python-frontmatter
+Requires-Dist: minify-html
+Requires-Dist: mistune>=3
+Requires-Dist: jinja2
+Requires-Dist: pygments
+Requires-Dist: Pillow
+Requires-Dist: rich
+Requires-Dist: tomli; python_version < "3.11"
+Requires-Dist: watchdog>=6.0
+Requires-Dist: livereload>=2.7
+Provides-Extra: dev
+Requires-Dist: mypy; extra == "dev"
+Requires-Dist: types-Pillow; extra == "dev"

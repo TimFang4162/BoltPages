@@ -1,0 +1,22 @@
+[site]
+name = "BoltPages"
+
+[build]
+cache =true
+log_level = "INFO"
+output_dir = "build"
+
+[paths]
+posts = "posts"
+pages = "pages"
+templates = "templates"
+static = "static"
+
+[images]
+webp_quality = 85
+
+[dev]
+port = 8000
+host = "127.0.0.1"
+debounce = 0.5
+watch_dirs = ["posts", "pages", "templates", "static"]

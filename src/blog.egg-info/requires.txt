@@ -1,0 +1,16 @@
+python-frontmatter
+minify-html
+mistune>=3
+jinja2
+pygments
+Pillow
+rich
+watchdog>=6.0
+livereload>=2.7
+
+[:python_version < "3.11"]
+tomli
+
+[dev]
+mypy
+types-Pillow

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}{{ metadata.title }}{% endblock %}
+
+{%block head %}{% endblock %}
+
+{% block body %}
+<article class="post-container">
+  <div class="post-main">
+    <header class="post-header">
+      <h1 class="post-title">{{ metadata.title }}</h1>
+      <div class="article-meta">
+        {% if metadata.date %}
+        <time class="article-date" datetime="{{ metadata.date }}">
+          <span class="icon--mdi icon--mdi--date-range icon_14px"></span>{{
+          metadata.date }}
+        </time>
+        {% endif %}
+        {% if metadata.tags %}
+        <div class="article-tags">
+          {% for tag in metadata.tags %}
+          <span class="article-tag"
+            >#<a href="/tags/{{ tag }}.html" rel="tag">{{ tag }}</a></span
+          >
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </header>
+    <main class="post-content">
+      <div class="doc">{{ content | safe }}</div>
+    </main>
+    <nav class="post-nav">
+      {% if next_post %}
+      <a href="/{{ next_post.path.with_suffix('.html') }}" class="post-nav-prev">
+        <span class="post-nav-label">下一篇</span>
+        <span class="post-nav-title">{{ next_post.metadata.title }}</span>
+        {% if next_post.metadata.date %}
+        <span class="post-nav-date">{{ next_post.metadata.date }}</span>
+        {% endif %}
+      </a>
+      {% else %}
+      <div class="post-nav-placeholder"></div>
+      {% endif %}
+      {% if prev_post %}
+      <a href="/{{ prev_post.path.with_suffix('.html') }}" class="post-nav-next">
+        <span class="post-nav-label">上一篇</span>
+        <span class="post-nav-title">{{ prev_post.metadata.title }}</span>
+        {% if prev_post.metadata.date %}
+        <span class="post-nav-date">{{ prev_post.metadata.date }}</span>
+        {% endif %}
+      </a>
+      {% else %}
+      <div class="post-nav-placeholder"></div>
+      {% endif %}
+    </nav>
+    <!-- <script src="https://giscus.app/client.js" data-repo="example/example"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzE5NjExNDQ=" data-category="Announcements"
+    data-category-id="DIC_kwDOFiutOM4CwTp6" data-mapping="pathname" data-strict="1" data-reactions-enabled="1"
+    data-emit-metadata="0" data-input-position="top" data-theme="noborder_gray" data-lang="zh-CN"
+    data-loading="lazy" crossorigin="anonymous" async>
+    </script> -->
+  </div>
+  {% if toc_data %}
+  <aside class="toc-sidebar" aria-label="文章目录">
+    <nav class="toc">
+      <div class="toc-header">目录</div>
+      <ul class="toc-list">
+        {% for item in toc_data %}
+        <li class="toc-item toc-item-{{ item.level }}">
+          <a href="#{{ item.id }}">{{ item.text }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </aside>
+  {% endif %}
+</article>
+{% endblock %}

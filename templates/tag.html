@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title | default('文章列表') }}{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+<main class="article-list-container">
+  {% set view_mode = 'card' %}
+  {% include "_article_list_items.html" %}
+  <p>共{{ posts|length }}篇文章</p>
+</main>
+{% endblock %}
